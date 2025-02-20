@@ -37,5 +37,15 @@ VALIDATE $? "Enabling mysql-server"
 systemctl start mysqld &>>$LOGFILE
 VALIDATE $? "Starting mysql-server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
-VALIDATE $? "Setting up root password"
+# mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+# VALIDATE $? "Setting up root password"
+
+#BELOW code is used to idempotency nature
+mysql -h db.awsproject.online -uroot -pExpenseApp@1 -e 'show databases;'
+if [ $? -ne 0 ]
+then
+    mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
+    VALIDATE $? "Setting up root password"
+else
+    echo -e "Root password is already set...$Y SKIPPING $N"
+fi
