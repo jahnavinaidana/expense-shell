@@ -44,3 +44,6 @@ then
 else
     echo -e "Expense user already exists...$Y SKIPPING $N"
 fi
+
+mkdir /app
+VALIDATE $? "Creating app directory"
