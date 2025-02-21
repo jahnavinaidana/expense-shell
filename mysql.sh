@@ -42,7 +42,7 @@ VALIDATE $? "Starting mysql-server"
 # mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOGFILE
 # VALIDATE $? "Setting up root password"
 
-#BELOW code is used to idempotency nature
+#Below code is used to idempotency nature
 mysql -h db.awsproject.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
 if [ $? -ne 0 ]
 then
