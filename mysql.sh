@@ -47,7 +47,7 @@ mysql -h db.awsproject.online -uroot -p${mysql_root_password} -e 'show databases
 if [ $? -ne 0 ]
 then
     mysql_secure_installation --set-root-pass ${mysql_root_password} &>>$LOGFILE
-    VALIDATE $? "Setting up root password"
+    VALIDATE $? "MYSQL Root password Setup"
 else
     echo -e "Root password is already set...$Y SKIPPING $N"
 fi
